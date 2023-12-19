@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Store } from '@ngrx/store';
-import { addToReadingList, getReadingList, removeFromReadingList } from '@tmo/books/data-access';
+import { addToReadingList, finishedBookReadingList, getReadingList, removeFromReadingList } from '@tmo/books/data-access';
 
 @Component({
   selector: 'tmo-reading-list',
@@ -16,6 +16,12 @@ export class ReadingListComponent {
   removeFromReadingList(item) {
     this.store.dispatch(removeFromReadingList({ item }));
     this.promptUndoAction(item);
+  }
+
+
+  //Finish reading
+  finishedBookFromReadingList(item) {
+    this.store.dispatch(finishedBookReadingList({ item }));
   }
 
 

@@ -8,8 +8,20 @@
       <div class="reading-list-item--details--author">
         {{ b.authors.join(',') }}
       </div>
+      <p>{{ b. finishedDate}}</p>
     </div>
     <div>
+
+      <button
+        mat-icon-button
+        [ngStyle]="{'color':'green'}"
+        [attr.aria-label]="'finish ' + b.title + ' from reading list'"
+        (click)="finishedBookFromReadingList(b)"
+      >
+        <mat-icon>check_circle</mat-icon>
+        
+      </button>
+
       <button
         mat-icon-button
         color="warn"

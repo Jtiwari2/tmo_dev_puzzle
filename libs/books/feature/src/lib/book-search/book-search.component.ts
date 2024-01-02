@@ -59,10 +59,9 @@ export class BookSearchComponent implements OnInit {
 
   // Open Snack Bar
   promptUndoAction(book: Book) {
-    let snackBarRef = this.snackBar.open('Added', 'Undo', { duration: 3000 });
+    const snackBarRef = this.snackBar.open('Added', 'Undo', { duration: 3000 });
     snackBarRef.afterDismissed().subscribe((data) => {
       if (data.dismissedByAction === true) {
-        console.log('adding data ------>', data);
         this.store.dispatch(
           removeFromReadingList({
             item: {bookId: book.id,title: book.title,

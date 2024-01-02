@@ -21,10 +21,9 @@ export class ReadingListComponent {
 
   // Open Snack Bar
   promptUndoAction(item) {
-    let snackBarRef = this.snackBar.open('Removed', 'Undo', { duration: 3000 });
+    const snackBarRef = this.snackBar.open('Removed', 'Undo', { duration: 3000 });
     snackBarRef.afterDismissed().subscribe((data) => {
       if (data.dismissedByAction === true) {
-        console.log('removing data ------->', data);
         this.store.dispatch(addToReadingList({book: item}));
       }
     });

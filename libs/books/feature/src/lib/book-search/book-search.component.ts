@@ -5,7 +5,7 @@ import {
   clearSearch,
   getAllBooks,
   ReadingListBook,
-  searchBooks,
+  searchBooks
 } from '@tmo/books/data-access';
 import { FormBuilder } from '@angular/forms';
 import { Book } from '@tmo/shared/models';

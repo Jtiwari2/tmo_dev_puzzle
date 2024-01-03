@@ -25,6 +25,8 @@
     <div>
 
       <button
+        mat-stroked-button
+        color="warn"
         [attr.aria-label]="'finish ' + b.title + ' from reading list'"
         (click)="finishedBookFromReadingList(b)"
         data-testing="mark-as-read"

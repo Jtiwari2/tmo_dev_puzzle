@@ -32,9 +32,15 @@ export class ReadingListService {
   async finishBook(id: string): Promise<void> {
     this.storage.update(list => {
       const index = list.findIndex(value=> value.bookId ===id);
-      console.log('Log Index-------> ',index);
+
+      if(list[index].finished === true){
+        list[index].finished = false;
+        list[index].finishedDate = "";
+      }else{
       list[index].finished = true;
       list[index].finishedDate = new Date().toISOString();
+      }
+      
       return list;
     });
   }

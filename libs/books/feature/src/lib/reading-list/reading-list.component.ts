@@ -21,7 +21,20 @@ export class ReadingListComponent {
 
   //Finish reading
   finishedBookFromReadingList(item) {
-    this.store.dispatch(finishedBookReadingList({ item }));
+    this.store.dispatch(finishedBookReadingList({item: {bookId: item.id,title: item.title,
+            authors: item.authors,description: item.description,finished:true,finishedDate: new Date().toISOString()} }));
+    this.promptReadUndoAction(item);
+  }
+
+  // Open Snack Bar for read book
+  promptReadUndoAction(item) {
+    let snackBarRef = this.snackBar.open('Removed', 'Undo', { duration: 3000 });
+    snackBarRef.afterDismissed().subscribe((data) => {
+      if (data.dismissedByAction === true) {
+        this.store.dispatch(finishedBookReadingList({ item: {bookId: item.id,title: item.title,
+          authors: item.authors,description: item.description,finished:false,finishedDate: ""} }));
+      }
+    });
   }
 
 
@@ -30,7 +43,6 @@ export class ReadingListComponent {
     let snackBarRef = this.snackBar.open('Removed', 'Undo', { duration: 3000 });
     snackBarRef.afterDismissed().subscribe((data) => {
       if (data.dismissedByAction === true) {
-        console.log('removing data ------->', data);
         this.store.dispatch(addToReadingList({book: item}));
       }
     });

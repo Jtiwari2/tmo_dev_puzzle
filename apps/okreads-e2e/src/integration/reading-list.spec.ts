@@ -15,10 +15,10 @@ describe('When: I use the reading list feature', () => {
   // new test case to check undo action for adding book
   it('Then: I can undo the action for adding book', () => {
     cy.get('input[type="search"]').type('javascript');
-    cy.get('form').submit();
-    cy.get('[data-testing="want-to-read-button"]').click({ multiple: true, force: true });
+    cy.get('form').submit().wait(2000);
+    cy.get('[data-testing="want-to-read-button"]').click({ multiple: true, force: true }).wait(1000);
 
-    cy.contains('Undo').click({ multiple: true });
+    cy.get('.mat-simple-snackbar-action').click().wait(500);
     cy.get('[data-testing="want-to-read-button"]').should('be.enabled');
   });
 
@@ -26,7 +26,7 @@ describe('When: I use the reading list feature', () => {
   // new test case to check undo action for removing book
   it('Then: I can undo the action for removing book', () => {
     cy.get('input[type="search"]').type('javascript');
-    cy.get('form').submit();
+    cy.get('form').submit().wait(2000);
     cy.get('[data-testing="want-to-read-button"]').click({ multiple: true, force: true });
 
     cy.get('[data-testing="toggle-reading-list"]').click();
@@ -35,9 +35,9 @@ describe('When: I use the reading list feature', () => {
       'My Reading List'
     );
 
-    cy.get('[data-testing="remove-book-button"]').click({ multiple: true ,force: true});
+    cy.get('[data-testing="remove-book-button"]').click({ multiple: true ,force: true}).wait(1000);
     
-    cy.get("#cdk-overlay-1").contains('Undo').click({ multiple: true });
+    cy.get('.mat-simple-snackbar-action').click().wait(500);
     cy.get('[data-testing="remove-book-button"]').should('exist');
 
   });

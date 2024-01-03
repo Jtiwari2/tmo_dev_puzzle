@@ -11,4 +11,34 @@ describe('When: I use the reading list feature', () => {
       'My Reading List'
     );
   });
+
+  // new test case to check undo action for adding book
+  it('Then: I can undo the action for adding book', () => {
+    cy.get('input[type="search"]').type('javascript');
+    cy.get('form').submit().wait(2000);
+    cy.get('[data-testing="want-to-read-button"]').click({ multiple: true, force: true }).wait(1000);
+
+    cy.get('.mat-simple-snackbar-action').click().wait(500);
+    cy.get('[data-testing="want-to-read-button"]').should('be.enabled');
+  });
+
+
+  // new test case to check undo action for removing book
+  it('Then: I can undo the action for removing book', () => {
+    cy.get('input[type="search"]').type('javascript');
+    cy.get('form').submit().wait(2000);
+    cy.get('[data-testing="want-to-read-button"]').click({ multiple: true, force: true });
+
+    cy.get('[data-testing="toggle-reading-list"]').click();
+    cy.get('[data-testing="reading-list-container"]').should(
+      'contain.text',
+      'My Reading List'
+    );
+
+    cy.get('[data-testing="remove-book-button"]').click({ multiple: true ,force: true}).wait(1000);
+    
+    cy.get('.mat-simple-snackbar-action').click().wait(500);
+    cy.get('[data-testing="remove-book-button"]').should('exist');
+
+  });
 });
